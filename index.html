@@ -15,12 +15,11 @@
         extend: {
           fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
           colors: {
-            /* IU-inspired palette */
-            brand: { /* Crimson */
+            brand: { /* IU crimson */
               50:'#FFF7F8',100:'#FFD6DB',200:'#FF9AA1',300:'#FF636A',400:'#F23A3F',
               500:'#DC231E',600:'#990000',700:'#800000',800:'#5A0C0C',900:'#3D0909'
             },
-            accent: { /* Gold */
+            accent: { /* gold */
               50:'#FFFCEB',100:'#FFF4C6',200:'#FFE694',300:'#FFD563',400:'#FFC132',
               500:'#FFAA00',600:'#A36B00',700:'#613D00',800:'#4B2F00',900:'#3A2400'
             }
@@ -40,7 +39,7 @@
       <a href="#" class="flex items-center gap-3">
         <!-- Placeholder MOSAIC logo -->
         <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-700 text-white font-extrabold tracking-tight">M</span>
-        <span class="font-semibold tracking-tight">MOSAIC Methods Workshop</span>
+        <span class="font-semibold tracking-tight">MOSAIC</span>
       </a>
       <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
         <a href="#about" class="hover:text-brand-700">About</a>
@@ -62,17 +61,17 @@
           <span class="text-3xl font-extrabold tracking-tight">M</span>
         </div>
         <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-          MOSAIC Methods Workshop
+          Methods of Social Analysis and Inquiry Colloquium
         </h1>
         <p class="mt-4 text-slate-600 max-w-2xl">
-          MOSAIC offers graduate students an additional space to workshop research, acquire new skills,
-          and sharpen understanding of social science research methods—across qualitative, quantitative, and computational traditions.
+          MOSAIC offers graduate students a space to workshop research, acquire new skills,
+          and sharpen understanding of social science research methods.
         </p>
         <div class="mt-6 flex flex-wrap gap-3 justify-center">
-          <a href="#about" class="rounded-xl border border-slate-300 bg-slate-100 px-5 py-3 text-slate-700 font-semibold hover:bg-brand-600 hover:text-white hover:border-brand-600">What is MOSAIC?</a>
-          <a href="#schedule" class="rounded-xl border border-slate-300 bg-slate-100 px-5 py-3 text-slate-700 font-semibold hover:bg-brand-600 hover:text-white hover:border-brand-600">This Semester</a>
+          <a href="#about" class="rounded-xl border border-slate-300 bg-slate-100 px-5 py-3 text-slate-700 font-semibold hover:bg-brand-600 hover:text-white hover:border-brand-600">About</a>
+          <a href="#schedule" class="rounded-xl border border-slate-300 bg-slate-100 px-5 py-3 text-slate-700 font-semibold hover:bg-brand-600 hover:text-white hover:border-brand-600">Schedule</a>
           <button id="downloadIcs" class="rounded-xl border border-slate-300 bg-slate-100 px-5 py-3 text-slate-700 font-semibold hover:bg-brand-600 hover:text-white hover:border-brand-600">
-            Download .ics
+            Add to calendar (.ics download)
           </button>
         </div>
       </div>
@@ -86,13 +85,12 @@
         <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">About the Workshop</h2>
         <p class="mt-3 text-slate-700">
           MOSAIC is a department-based methods community. We run weekly sessions that rotate between:
-          paper workshops, methods demos, research design clinics, reading groups, and professionalization topics.
-          The goal is simple: help you make faster progress on higher-quality work, together.
+          research presentations, methods demos, programming modules, and student labs.
         </p>
         <ul class="mt-4 text-slate-700 list-disc pl-6">
-          <li>Open to all graduate students in Political Science (and allied fields by arrangement).</li>
-          <li>Bring work-in-progress: drafts, designs, data, or even ideas on a napkin.</li>
-          <li>We keep it constructive, specific, and time-bound.</li>
+          <li>Open to all faculty and graduate students in the Department of Political Science.</li>
+          <li>Bring work-in-progress: drafts, designs, data.</li>
+          <li>Keep it constructive and specific.</li>
         </ul>
       </div>
     </div>
@@ -104,12 +102,9 @@
       <div class="flex items-end justify-between flex-wrap gap-6">
         <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">This Semester’s Schedule</h2>
         <div class="text-sm text-slate-600">
-          Weekly from now through December. Dates & short descriptions below.
+          Fridays, <strong>10AM – 11AM</strong> Woodburn 218
         </div>
       </div>
-
-      <!-- Controls (optional, hidden by default) -->
-      <!-- Toggle display or just leave comments explaining MEETING_DAY in code. -->
 
       <div id="sessions" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
@@ -130,45 +125,160 @@
       <div class="rounded-2xl border border-slate-200 p-6 bg-white">
         <h2 class="text-2xl font-bold tracking-tight">Contact</h2>
         <p class="mt-2 text-slate-700">
-          Questions or want to present? Email the organizers at
-          <a href="mailto:mosaic@university.edu" class="text-brand-700 hover:underline">mosaic@university.edu</a>.
+          Questions or want to present? Email Caleb Lucas (<a href="mailto:lucascaj@iu.edu" class="text-brand-700 hover:underline">lucascaj@iu.edu</a>) or Harold Chambers (<a href="mailto:harrcham@iu.edu" class="text-brand-700 hover:underline">harrcham@iu.edu</a>).
         </p>
       </div>
       <p class="mt-6 text-center text-xs text-slate-500">
-        © <span id="year"></span> MOSAIC Methods Workshop • Department of Political Science
+        © <span id="year"></span> Methods of Social Analysis and Inquiry Colloquium
       </p>
     </div>
   </section>
 
   <script>
-    // ===== CONFIGURE YOUR SEMESTER HERE =====
-    // Meeting day: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
-    // Default: use today's weekday so it's "weekly from now"
-    const MEETING_DAY = new Date().getDay();
+    // ===== FIXED SEMESTER SETTINGS (requested): Fridays 10–11 AM, Sep 5 – Dec 12, 2025 =====
+    const TZID = 'America/Indiana/Indianapolis';
+    const MEETING_DAY = 5; // 0=Sun ... 5=Fri
+    const TIME_START = { hour: 10, minute: 0 };
+    const TIME_END   = { hour: 11, minute: 0 };
+    const SEMESTER_START = new Date('September 5, 2025 10:00');
+    const SEMESTER_END   = new Date('December 12, 2025 11:00');
 
-    // End date for the semester (inclusive). Adjust if needed.
-    const SEMESTER_END = new Date('December 20, 2025 23:59:59');
-
-    // Optional: seed a few named sessions; others will cycle through topics.
+    // Optional: first session seeded; others rotate topics
     const seeded = [
-      { when: 'first', title: 'Paper presentation', desc: 'Paper presentation: Inwoo Lee' },
-      // Add more fixed items like:
-      // { date: '2025-09-10', title: 'Methods demo', desc: 'Intro to causal diagrams (DAGs).' },
+      { date: '2025-09-05', title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' }
     ];
 
-    // Rotating topics used when no specific seed is provided
     const topics = [
-      { title: 'Paper workshop', desc: 'Work-in-progress discussion with targeted feedback on theory, design, and identification.' },
-      { title: 'Methods demo', desc: 'Hands-on session: reproducible workflows, code tips, or new tools.' },
-      { title: 'Research design clinic', desc: 'Bring your designs and get fast, concrete suggestions on measurement, sampling, and inference.' },
-      { title: 'Replication workshop', desc: 'Tackle a replication package together—data hygiene, documentation, and robustness.' },
-      { title: 'Reading group', desc: 'Discuss a recent methods paper—guts of the argument, assumptions, and implications.' },
-      { title: 'Visualization clinic', desc: 'Design clearer figures: scales, uncertainty, and storytelling in plots and tables.' },
-      { title: 'Fieldwork & ethics', desc: 'Practical ethics, safety, and data integrity in challenging contexts.' }
+      { title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
+      { title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
+      { title: 'Paper Workshops: Chambers and TBD', desc: 'Harold Chambers and TBD. Work-in-progress discussion with targeted feedback on theory, design, and identification.' },
+      { title: 'Paper Workshops: Kim and Lee', desc: 'Joohyun Kim and Inwoo Lee. Work-in-progress discussion with targeted feedback on theory, design, and identification.' },
+      { title: 'Visualization Clinic', desc: 'Design clearer figures: ggplot2, plotly, Shiny.' },
+      { title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
+      { title: 'Webscraping 101', desc: 'Digesting the Internet: the basics of extracting data from websites.' },
+      { title: 'Paper Workshop: Adams', desc: 'Mary Adams. Work-in-progress discussion with targeted feedback on theory, design, and identification.' },
+      { title: 'Paper Workshop: Oduncu', desc: 'Ramazan Oduncu. Work-in-progress discussion with targeted feedback on theory, design, and identification.' },
+      { title: 'Computational Text Analysis', desc: 'Generating inferences using text analysis, focusing on AI/ML applications alongside traditional models.' },
+      { title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
+      { title: 'Paper Workshop: Decourt', desc: 'William Decourt. Work-in-progress discussion with targeted feedback on theory, design, and identification.' },
+      { title: 'Paper Workshop: Chen', desc: 'Kejun Chen. Work-in-progress discussion with targeted feedback on theory, design, and identification.' },
+      { title: 'Paper Workshop: Kang', desc: 'Sungsik Kang. Work-in-progress discussion with targeted feedback on theory, design, and identification.' }
+
     ];
 
-    // ===== HELPER FUNCTIONS =====
-    const fmt = (d) =>
+    // ===== HELPERS =====
+    const fmtDate = (d) =>
       d.toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
 
+    const timeRangeLabel = `${String(TIME_START.hour % 12 || 12)}${TIME_START.minute ? ':'+TIME_START.minute.toString().padStart(2,'0') : ''}–${String(TIME_END.hour % 12 || 12)}${TIME_END.minute ? ':'+TIME_END.minute.toString().padStart(2,'0') : ''} ${TIME_END.hour >= 12 ? 'PM' : 'AM'}`;
+
     function nextDateOnOrAfter(start, weekday) {
+      const d = new Date(start);
+      d.setHours(0,0,0,0);
+      const delta = (weekday - d.getDay() + 7) % 7;
+      d.setDate(d.getDate() + delta);
+      return d;
+    }
+
+    function setTime(d, h, m) {
+      const x = new Date(d);
+      x.setHours(h, m, 0, 0);
+      return x;
+    }
+
+    function weeklyBetween(start, end) {
+      const out = [];
+      let d = new Date(start);
+      while (d <= end) {
+        out.push(new Date(d));
+        d.setDate(d.getDate() + 7);
+      }
+      return out;
+    }
+
+    // ===== BUILD SESSIONS =====
+    const firstFriday = nextDateOnOrAfter(SEMESTER_START, MEETING_DAY);
+    const sessionStarts = weeklyBetween(firstFriday, SEMESTER_END).map(d => setTime(d, TIME_START.hour, TIME_START.minute));
+    const sessionEnds   = weeklyBetween(firstFriday, SEMESTER_END).map(d => setTime(d, TIME_END.hour, TIME_END.minute));
+
+    // Map seeded by ISO date
+    const seedMap = new Map();
+    for (const s of seeded) {
+      if (s.date) {
+        const key = new Date(s.date + 'T00:00:00').toDateString();
+        seedMap.set(key, s);
+      }
+    }
+
+    const sessions = sessionStarts.map((start, i) => {
+      const end = sessionEnds[i];
+      const key = new Date(start.getFullYear(), start.getMonth(), start.getDate()).toDateString();
+      if (seedMap.has(key)) {
+        const s = seedMap.get(key);
+        return { start, end, title: s.title, desc: s.desc };
+      }
+      const t = topics[i % topics.length];
+      return { start, end, title: t.title, desc: t.desc };
+    });
+
+    // ===== RENDER =====
+    const wrap = document.getElementById('sessions');
+    const tpl = document.getElementById('sessionCard');
+    sessions.forEach(s => {
+      const node = tpl.content.cloneNode(true);
+      node.querySelector('.date').textContent = `${fmtDate(s.start)} • ${timeRangeLabel}`;
+      node.querySelector('.title').textContent = s.title;
+      node.querySelector('.desc').textContent = s.desc;
+      wrap.appendChild(node);
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== ICS EXPORT (with local TZ) =====
+    function pad2(n){ return String(n).padStart(2,'0'); }
+    function fmtICSLocal(d) {
+      // Local "floating" time (no Z) with HHMMSS
+      return `${d.getFullYear()}${pad2(d.getMonth()+1)}${pad2(d.getDate())}T${pad2(d.getHours())}${pad2(d.getMinutes())}00`;
+    }
+
+    function makeICS(events){
+      const lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Methods of Social Analysis and Inquiry Colloquium//EN'
+        // (Most clients understand TZID without an embedded VTIMEZONE;
+        // add VTIMEZONE if your client complains.)
+      ];
+      events.forEach((s, idx) => {
+        const uid = `mosaic-${s.start.getTime()}-${idx}@example.edu`;
+        lines.push(
+          'BEGIN:VEVENT',
+          `UID:${uid}`,
+          `DTSTAMP:${fmtICSLocal(new Date())}`,
+          `SUMMARY:MOSAIC: ${s.title}`,
+          `DESCRIPTION:${s.desc.replace(/\n/g, '\\n')}`,
+          `DTSTART;TZID=${TZID}:${fmtICSLocal(s.start)}`,
+          `DTEND;TZID=${TZID}:${fmtICSLocal(s.end)}`,
+          'END:VEVENT'
+        );
+      });
+      lines.push('END:VCALENDAR');
+      return lines.join('\r\n');
+    }
+
+    document.getElementById('downloadIcs').addEventListener('click', () => {
+      const ics = makeICS(sessions);
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'MOSAIC_Fall_2025_Fridays_10-11am.ics';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
