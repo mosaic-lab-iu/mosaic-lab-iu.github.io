@@ -111,7 +111,7 @@
   <section id="schedule" class="py-16 md:py-20 bg-accent-50 border-y border-slate-200/70">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex items-end justify-between flex-wrap gap-6">
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">This Semester’s Schedule</h2>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">This Semester's Schedule</h2>
         <div class="text-sm text-slate-600">
           Fridays, <strong>10AM – 11AM</strong> Woodburn 218
         </div>
@@ -154,56 +154,25 @@
       const MEETING_DAY = 5; // 0=Sun ... 5=Fri
       const TIME_START = { hour: 10, minute: 0 };
       const TIME_END   = { hour: 11, minute: 0 };
-      const SEMESTER_START = new Date('September 5, 2025 10:00');
-      const SEMESTER_END   = new Date('December 12, 2025 11:00');
+      const SEMESTER_START = new Date('February 27, 2026 10:00');
+      const SEMESTER_END   = new Date('April 17, 2026 11:00');
 
-      // Optional: first session seeded; others rotate topics
-      const seeded = [
-        { date: '2025-09-05', title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
-
-        // NEW: Oct 10 — Visualization Clinic (Data viz lab)
-        { date: '2025-10-10', title: 'Visualization Clinic', desc: 'Design clearer figures. Interactive visualizations to explore data and motivate analysis. ggplot2, plotly, Shiny.' },
-        
-        // NEW: Dec 12 — Chen presents (9–10am)
-        {
-          date: '2025-12-12',
-          title: 'Paper Workshop: Chen (9am-10am)',
-          desc: 'Kejun Chen. Work-in-progress presentation and discussion.',
-          time: { start: { hour: 9, minute: 0 }, end: { hour: 10, minute: 0 } }
-        }
-      ];
+      // Optional: seeded session overrides by date
+      const seeded = [];
 
       // ===== CANCELED / BLACKOUT DATES (no meeting) =====
       const blackouts = [
-        { date: '2025-10-03', reason: 'No meeting — Third-year paper presentations' },
-        { date: '2025-10-10', reason: 'No meeting — Fall break' },
-        { date: '2025-10-24', reason: 'No meeting — Teaching workshop' },
-        { date: '2025-10-31', reason: 'No meeting — American Politics Conference' },
-        { date: '2025-11-14', reason: 'No meeting — Graduate Student Conference' },
-        { date: '2025-11-21', reason: 'No meeting — Faculty AI workshop' },
-        { date: '2025-11-28', reason: 'No meeting — Thanksgiving' },
+        { date: '2026-03-27', reason: 'No meeting — Spring break' },
       ];
 
       const topics = [
-        { title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
-        { title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
-        { title: 'Paper Workshops: Kim', desc: 'Joohyun Kim. Work-in-progress presentation and discussion.' },
-        { title: 'Paper Workshops: Chambers and Lee', desc: 'Harold Chambers and Inwoo Lee. Work-in-progress presentation and discussion.' },
-        { title: 'Visualization Clinic', desc: 'Design clearer figures. Interactive visualizations to explore data and motivate analysis. ggplot2, plotly, Shiny.' },
-        { title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
-        { title: 'Webscraping 101', desc: 'Digest the internet. Basics of extracting data from websites using code.' },
-        { title: 'Paper Workshop: Adams', desc: 'Mary Adams. Work-in-progress presentation and discussion.' },
-        { title: 'Paper Workshop: Oduncu', desc: 'Ramazan Oduncu. Work-in-progress presentation and discussion.' },
-        { title: 'Paper Workshop: Adams', desc: 'Mary Adams. Work-in-progress presentation and discussion.' },
-        { title: 'Graduate Lab', desc: 'Collaborative discussion, problem solving, and accountability.' },
         { title: 'Paper Workshop: Decourt', desc: 'William Decourt. Work-in-progress presentation and discussion.' },
-        {
-          title: 'Paper Workshop: Chen (9am-10am)',
-          desc: 'Kejun Chen. Work-in-progress presentation and discussion.',
-          // <- one-off time override (9–10am)
-          time: { start: { hour: 9, minute: 0 }, end: { hour: 10, minute: 0 } }
-        },
-        { title: 'Paper Workshop: Dalmas', desc: 'Bruna Dalmas. Work-in-progress presentation and discussion.' }
+        { title: 'Paper Workshop: Adams', desc: 'Mary Adams. Work-in-progress presentation and discussion.' },
+        { title: 'Paper Workshop: Dalmas', desc: 'Bruna Dalmas. Work-in-progress presentation and discussion.' },
+        { title: 'Paper Workshop: Chen', desc: 'Kejun Chen. Work-in-progress presentation and discussion.' },
+        { title: 'Paper Workshop: Oduncu', desc: 'Ramazan Oduncu. Work-in-progress presentation and discussion.' },
+        { title: 'Paper Workshop: Lee', desc: 'Soyoung Lee. Work-in-progress presentation and discussion.' },
+        { title: 'Paper Workshop: Niu', desc: 'Guanjie Niu. Work-in-progress presentation and discussion.' },
       ];
 
       // ===== HELPERS =====
@@ -264,6 +233,9 @@
         blackoutMap.set(key, b);
       }
 
+      // Track topic index separately so blackouts don't consume a topic
+      let topicIndex = 0;
+
       const sessions = sessionStarts.map((start, i) => {
         const end = sessionEnds[i];
         const key = new Date(start.getFullYear(), start.getMonth(), start.getDate()).toDateString();
@@ -287,11 +259,13 @@
             sStart = setTime(start, s.time.start.hour, s.time.start.minute);
             sEnd   = setTime(end,   s.time.end.hour,   s.time.end.minute);
           }
+          topicIndex++;
           return { start: sStart, end: sEnd, title: s.title, desc: s.desc, canceled: false };
         }
 
-        // Otherwise rotate topics (allow per-topic time overrides)
-        const t = topics[i % topics.length];
+        // Otherwise assign topics in order
+        const t = topics[topicIndex % topics.length];
+        topicIndex++;
         let tStart = start, tEnd = end;
         if (t.time) {
           tStart = setTime(start, t.time.start.hour, t.time.start.minute);
@@ -354,8 +328,6 @@
           'BEGIN:VCALENDAR',
           'VERSION:2.0',
           'PRODID:-//Methods of Social Analysis and Inquiry Colloquium//EN'
-          // (Most clients understand TZID without an embedded VTIMEZONE;
-          // add VTIMEZONE if your client complains.)
         ];
         events.forEach((s, idx) => {
           const uid = `mosaic-${s.start.getTime()}-${idx}@example.edu`;
@@ -383,7 +355,7 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = 'MOSAIC_Fall_2025_Fridays_10-11am.ics';
+          a.download = 'MOSAIC_Spring_2026_Fridays_10-11am.ics';
           document.body.appendChild(a);
           a.click();
           a.remove();
